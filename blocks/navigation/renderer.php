@@ -75,8 +75,8 @@ class block_navigation_renderer extends plugin_renderer_base {
             $title = $item->get_title();
             
             // add by eALPS Developer shortname -> fullname
-            if ($item->type  $item::TYPE_COURSE) {
-	            if ($title ! '') {
+            if ($item->type == $item::TYPE_COURSE) {
+	            if ($title !== '') {
 	                $content = $title;
 	            }
 	        }
