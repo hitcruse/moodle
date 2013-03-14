@@ -30,19 +30,10 @@
 defined('MOODLE_INTERNAL') || die();
 
 
-<<<<<<< HEAD
 $version  = 2012120303.03;              // 20121203      = branching date YYYYMMDD - do not modify!
                                         //         RR    = release increments - 00 in DEV branches
                                         //           .XX = incremental changes
 
 $release  = '2.4.3+ (Build: 20130328)';  // Human-friendly version name
-=======
-$version  = 2012120302.00;              // 20121203      = branching date YYYYMMDD - do not modify!
-                                        //         RR    = release increments - 00 in DEV branches
-                                        //           .XX = incremental changes
-
-$release  = '2.4.2 (Build: 20130311)';  // Human-friendly version name
->>>>>>> Moodle release 2.4.2
-
 $branch   = '24';                       // this version's branch
 $maturity = MATURITY_STABLE;            // this version's maturity level
