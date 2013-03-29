@@ -130,7 +130,7 @@ class auth_plugin_shibboleth extends auth_plugin_base {
                 }
             } else if ($key == 'lastname'){
                 if ($_SERVER['affiliation'] == 'student') {
-                    $result[$key] = $this->get_first_string($_SERVER['nameId;lang-ja']);
+                    $result[$key] = $this->get_first_string($_SERVER['givenName;lang-ja']).$this->get_first_string($_SERVER['sn;lang-ja']);
                 } else {
                     $result[$key] = $this->get_first_string($_SERVER['givenName;lang-ja']);
                 }
