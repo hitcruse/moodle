@@ -34,6 +34,7 @@
 define('CLI_SCRIPT', true);
 
 require(dirname(dirname(dirname(dirname(__FILE__)))).'/config.php');
+require_once($CFG->template_base.'/enrol/database/lib.php');
 require_once($CFG->libdir.'/clilib.php');
 
 // Now get cli options.
@@ -71,7 +72,7 @@ if (!enrol_is_enabled('database')) {
 }
 
 // add by eALPS Developer
-$siteArray = = array (
+$siteArray = array (
     'd'  => 'デフォルト',
     'g' => '共通教育',
     'l' => '人文学部',
