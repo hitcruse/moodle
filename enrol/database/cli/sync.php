@@ -70,11 +70,56 @@ if (!enrol_is_enabled('database')) {
     exit(1);
 }
 
-$verbose = !empty($options['verbose']);
-$enrol = enrol_get_plugin('database');
-$result = 0;
+// add by eALPS Developer
+$siteArray = = array (
+    'd'  => 'デフォルト',
+    'g' => '共通教育',
+    'l' => '人文学部',
+    'e' => '教育学部',
+    'k' => '経済学部',
+    's' => '理学部',
+    'm' => '医学部',
+    't' => '工学部',
+    'a' => '農学部',
+    'f' => '繊維学部',
+    'mv' => '医学部閲覧用',
+    'help' => 'eALPSヘルプ',
+    'fdsd' => 'eALPS教職員用',
+    'hospital' => '附属病院',
+    'facility' => '大学施設',
+    'teachingCredential' => '教員免許更新講習会',
+    'eChes' => 'eChes',
+    'photo' => 'フォト',
+    'other' => 'その他',
+);
 
-$result = $result | $enrol->sync_courses($verbose);
-$result = $result | $enrol->sync_enrolments($verbose);
+$fiscalYear = 0;
+if(date('n') < 3) {
+	$fiscalYear = date('Y') - 1;
+} else {
+	$fiscalYear = date('Y');
+}
+// end by eALPS Developer
 
+// add by eALPS Developer
+foreach($siteArray as $siteEnName => $siteJaName) {
+// end by eALPS Developer
+
+	// add by eALPS Developer
+	$CFG->wwwroot   = $base_wwwroot.'/'.$fiscalYear.'/'.$siteEnName;
+	$CFG->dbname    = $fiscalYear.'_'.$siteEnName;
+    $CFG->dirroot = $template_base;
+    $CFG->dataroot  = $base_dataroot.'/'.$fiscalYear.'/'.$siteEnName;
+	// end by eALPS Developer
+
+	$verbose = !empty($options['verbose']);
+	$enrol = enrol_get_plugin('database');
+	$result = 0;
+	
+	$result = $result | $enrol->sync_courses($verbose);
+	$result = $result | $enrol->sync_enrolments($verbose);
+	
+// add by eALPS Developer
+}
+// end by eALPS Developer
 exit($result);
