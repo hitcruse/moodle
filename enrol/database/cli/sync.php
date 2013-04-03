@@ -34,7 +34,7 @@
 define('CLI_SCRIPT', true);
 
 require(dirname(dirname(dirname(dirname(__FILE__)))).'/config.php');
-require_once($CFG->template_base.'/enrol/database/lib.php');
+require_once($template_base.'/enrol/database/lib.php');
 require_once($CFG->libdir.'/clilib.php');
 
 // Now get cli options.
@@ -66,10 +66,12 @@ Sample cron entry:
     die;
 }
 
+/*
 if (!enrol_is_enabled('database')) {
     echo('enrol_database plugin is disabled, sync is disabled'."\n");
     exit(1);
 }
+*/
 
 // add by eALPS Developer
 $siteArray = array (
@@ -112,6 +114,11 @@ foreach($siteArray as $siteEnName => $siteJaName) {
     $CFG->dirroot = $template_base;
     $CFG->dataroot  = $base_dataroot.'/'.$fiscalYear.'/'.$siteEnName;
 	// end by eALPS Developer
+	
+	if (!enrol_is_enabled('database')) {
+	    echo('enrol_database plugin is disabled, sync is disabled'."\n");
+	    continue;
+	}
 
 	$verbose = !empty($options['verbose']);
 	$enrol = enrol_get_plugin('database');
