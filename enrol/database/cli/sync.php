@@ -102,6 +102,7 @@ if(date('n') < 3) {
 } else {
 	$fiscalYear = date('Y');
 }
+echo('fiscalYear: '.$fiscalYear);
 // end by eALPS Developer
 
 // add by eALPS Developer
@@ -113,6 +114,10 @@ foreach($siteArray as $siteEnName => $siteJaName) {
 	$CFG->dbname    = $fiscalYear.'_'.$siteEnName;
     $CFG->dirroot = $template_base;
     $CFG->dataroot  = $base_dataroot.'/'.$fiscalYear.'/'.$siteEnName;
+    echo($CFG->wwwroot);
+    echo($CFG->dbname);
+    echo($CFG->dirroot);
+    echo($CFG->dataroot);
 	// end by eALPS Developer
 	
 	if (!enrol_is_enabled('database')) {
@@ -126,6 +131,8 @@ foreach($siteArray as $siteEnName => $siteJaName) {
 	
 	$result = $result | $enrol->sync_courses($verbose);
 	$result = $result | $enrol->sync_enrolments($verbose);
+	
+	echo($result);
 	
 // add by eALPS Developer
 }
