@@ -95,10 +95,10 @@ $CFG->wwwroot   = $base_wwwroot.'/'.$fiscalYear.'/'.$siteEnName;
 
 	echo('SERVER[REQUEST_URI]：'.$_SERVER['REQUEST_URI']."\n");
 		
-	require(dirname(dirname(dirname(dirname(__FILE__)))).'/config.php');
-	require("$CFG->dirroot/lib/setup.php");
-	require($template_base.'/enrol/database/lib.php');
-	require_once($CFG->libdir.'/clilib.php');
+	include(dirname(dirname(dirname(dirname(__FILE__)))).'/config.php');
+	include("$CFG->dirroot/lib/setup.php");
+	include_once($template_base.'/enrol/database/lib.php');
+	include_once($CFG->libdir.'/clilib.php');
 	
 	echo("必要ファイルの読み込みを完了しました．\n");
 	
