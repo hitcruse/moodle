@@ -34,7 +34,7 @@
 define('CLI_SCRIPT', true);
 
 // add by eALPS Developer
-global $_SERVER['REQUEST_URI'];
+global $_SERVER;
 // end by eALPS Developer
 
 // add by eALPS Developer
