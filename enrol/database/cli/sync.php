@@ -93,6 +93,7 @@ $CFG->wwwroot   = $base_wwwroot.'/'.$fiscalYear.'/'.$siteEnName;
 	echo('SERVER[REQUEST_URI] : '.$_SERVER['REQUEST_URI']."\n");
 		
 	require(dirname(dirname(dirname(dirname(__FILE__)))).'/config.php');
+	require("$CFG->dirroot/lib/setup.php");
 	require_once($template_base.'/enrol/database/lib.php');
 	require_once($CFG->libdir.'/clilib.php');
 	
