@@ -39,10 +39,10 @@ global $_SERVER;
 
 // add by eALPS Developer
 $siteArray = array (
+    'e' => '教育学部',
     'd'  => 'デフォルト',
     'g' => '共通教育',
     'l' => '人文学部',
-    'e' => '教育学部',
     'k' => '経済学部',
     's' => '理学部',
     'm' => '医学部',
@@ -69,10 +69,10 @@ if(date('n') < 3) {
 echo("fiscalYear: $fiscalYear\n");
 // end by eALPS Developer
 
-echo("start\n");
 
 // add by eALPS Developer
 foreach($siteArray as $siteEnName => $siteJaName) {
+	echo($siteJaName."の同期スタート\n");
 // end by eALPS Developer
 
 	// add by eALPS Developer
@@ -155,12 +155,12 @@ $CFG->wwwroot   = $base_wwwroot.'/'.$fiscalYear.'/'.$siteEnName;
 	$result = $result | $enrol->sync_enrolments($verbose);
 	
 	echo($result."\n");
-	echo("$siteJaName の同期が終了しました．\n");
+	echo($siteJaName."の同期が終了しました．\n");
 	
 // add by eALPS Developer
 }
 // end by eALPS Developer
 
-echo("全てのサイトの同期がしゅうりょうしました．\n");
+echo("全てのサイトの同期が終了しました．\n");
 
 exit($result);
