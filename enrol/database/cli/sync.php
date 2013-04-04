@@ -90,7 +90,7 @@ $CFG->wwwroot   = $base_wwwroot.'/'.$fiscalYear.'/'.$siteEnName;
 
 	$_SERVER['REQUEST_URI'] = '/'.$fiscalYear.'/'.$siteEnName.'/';
 
-	echo("SERVER[REQUEST_URI] : $_SERVER['REQUEST_URI']\n");
+	echo('SERVER[REQUEST_URI] : '.$_SERVER['REQUEST_URI']."\n");
 		
 	require(dirname(dirname(dirname(dirname(__FILE__)))).'/config.php');
 	require_once($template_base.'/enrol/database/lib.php');
