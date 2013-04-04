@@ -33,45 +33,9 @@
 
 define('CLI_SCRIPT', true);
 
-require(dirname(dirname(dirname(dirname(__FILE__)))).'/config.php');
-require_once($template_base.'/enrol/database/lib.php');
-require_once($CFG->libdir.'/clilib.php');
-
-// Now get cli options.
-list($options, $unrecognized) = cli_get_params(array('verbose'=>false, 'help'=>false), array('v'=>'verbose', 'h'=>'help'));
-
-if ($unrecognized) {
-    $unrecognized = implode("\n  ", $unrecognized);
-    cli_error(get_string('cliunknowoption', 'admin', $unrecognized));
-}
-
-if ($options['help']) {
-    $help =
-"Execute enrol sync with external database.
-The enrol_database plugin must be enabled and properly configured.
-
-Options:
--v, --verbose         Print verbose progess information
--h, --help            Print out this help
-
-Example:
-\$sudo -u www-data /usr/bin/php enrol/database/cli/sync.php
-
-Sample cron entry:
-# 5 minutes past 4am
-5 4 * * * \$sudo -u www-data /usr/bin/php /var/www/moodle/enrol/database/cli/sync.php
-";
-
-    echo $help;
-    die;
-}
-
-/*
-if (!enrol_is_enabled('database')) {
-    echo('enrol_database plugin is disabled, sync is disabled'."\n");
-    exit(1);
-}
-*/
+// add by eALPS Developer
+global $_SERVER['REQUEST_URI'];
+// end by eALPS Developer
 
 // add by eALPS Developer
 $siteArray = array (
@@ -93,7 +57,7 @@ $siteArray = array (
     'teachingCredential' => '教員免許更新講習会',
     'eChes' => 'eChes',
     'photo' => 'フォト',
-    'other' => 'その他',
+    'other' => 'その他'
 );
 
 $fiscalYear = 0;
@@ -105,12 +69,15 @@ if(date('n') < 3) {
 echo('fiscalYear: '.$fiscalYear);
 // end by eALPS Developer
 
+echo('start');
+
 // add by eALPS Developer
 foreach($siteArray as $siteEnName => $siteJaName) {
 // end by eALPS Developer
 
 	// add by eALPS Developer
-	$CFG->wwwroot   = $base_wwwroot.'/'.$fiscalYear.'/'.$siteEnName;
+	/*
+$CFG->wwwroot   = $base_wwwroot.'/'.$fiscalYear.'/'.$siteEnName;
 	$CFG->dbname    = $fiscalYear.'_'.$siteEnName;
     $CFG->dirroot = $template_base;
     $CFG->dataroot  = $base_dataroot.'/'.$fiscalYear.'/'.$siteEnName;
@@ -118,8 +85,62 @@ foreach($siteArray as $siteEnName => $siteJaName) {
     echo($CFG->dbname);
     echo($CFG->dirroot);
     echo($CFG->dataroot);
+*/
 	// end by eALPS Developer
+
+	$_SERVER['REQUEST_URI'] = 'https://moodle-cloud.ealps.shinshu-u.ac.jp/'.$fiscalYear.'/'.$siteEnName.'/';
+
+	echo('$_SERVER[REQUEST_URI] : '.$_SERVER['REQUEST_URI']);
+		
+	require(dirname(dirname(dirname(dirname(__FILE__)))).'/config.php');
+	require_once($template_base.'/enrol/database/lib.php');
+	require_once($CFG->libdir.'/clilib.php');
 	
+	echo('complete_require');
+	
+	// Now get cli options.
+	list($options, $unrecognized) = cli_get_params(
+													array('verbose'=>false,
+															'help'=>false
+													), 
+													array('v'=>'verbose',
+															'h'=>'help'
+													)
+												);
+	
+	
+	if ($unrecognized) {
+	    $unrecognized = implode("\n  ", $unrecognized);
+	    cli_error(get_string('cliunknowoption', 'admin', $unrecognized));
+	}
+	
+	if ($options['help']) {
+	    $help =
+	"Execute enrol sync with external database.
+	The enrol_database plugin must be enabled and properly configured.
+	
+	Options:
+	-v, --verbose         Print verbose progess information
+	-h, --help            Print out this help
+	
+	Example:
+	\$sudo -u www-data /usr/bin/php enrol/database/cli/sync.php
+	
+	Sample cron entry:
+	# 5 minutes past 4am
+	5 4 * * * \$sudo -u www-data /usr/bin/php /var/www/moodle/enrol/database/cli/sync.php
+	";
+	
+	    echo $help;
+	    die;
+	}
+	
+	/*
+	if (!enrol_is_enabled('database')) {
+	    echo('enrol_database plugin is disabled, sync is disabled'."\n");
+	    exit(1);
+	}
+	*/
 	if (!enrol_is_enabled('database')) {
 	    echo('enrol_database plugin is disabled, sync is disabled'."\n");
 	    continue;
@@ -137,4 +158,7 @@ foreach($siteArray as $siteEnName => $siteJaName) {
 // add by eALPS Developer
 }
 // end by eALPS Developer
+
+echo('end');
+
 exit($result);
