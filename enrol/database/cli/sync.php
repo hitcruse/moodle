@@ -68,7 +68,7 @@ if(date('n') < 3) {
 } else {
 	$fiscalYear = date('Y');
 }
-echo("fiscalYear: $fiscalYear\n\n");
+echo("fiscalYear：$fiscalYear\n\n");
 // end by eALPS Developer
 
 
@@ -93,14 +93,14 @@ $CFG->wwwroot   = $base_wwwroot.'/'.$fiscalYear.'/'.$siteEnName;
 
 	$_SERVER['REQUEST_URI'] = '/'.$fiscalYear.'/'.$siteEnName.'/';
 
-	echo('SERVER[REQUEST_URI] : '.$_SERVER['REQUEST_URI']."\n");
+	echo('SERVER[REQUEST_URI]：'.$_SERVER['REQUEST_URI']."\n");
 		
 	require(dirname(dirname(dirname(dirname(__FILE__)))).'/config.php');
 	require("$CFG->dirroot/lib/setup.php");
 	require($template_base.'/enrol/database/lib.php');
-	/* require($CFG->libdir.'/clilib.php'); */
+	require_once($CFG->libdir.'/clilib.php');
 	
-	echo("complete_require\n");
+	echo("必要ファイルの読み込みを完了しました．\n");
 	
 	// Now get cli options.
 	list($options, $unrecognized) = cli_get_params(
