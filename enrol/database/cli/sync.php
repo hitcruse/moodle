@@ -39,17 +39,17 @@ global $_SERVER;
 
 // add by eALPS Developer
 $siteArray = array (
-    'l' => '人文学部',
     'k' => '経済学部',
+    'f' => '繊維学部',
     /*
-'t' => '工学部',
-    'e' => '教育学部',
-    'd'  => 'デフォルト',
+'d'  => 'デフォルト',
     'g' => '共通教育',
+    'l' => '人文学部',
+    'e' => '教育学部',
     's' => '理学部',
     'm' => '医学部',
+    't' => '工学部',
     'a' => '農学部',
-    'f' => '繊維学部',
     'mv' => '医学部閲覧用',
     'help' => 'eALPSヘルプ',
     'fdsd' => 'eALPS教職員用',
@@ -68,7 +68,7 @@ if(date('n') < 3) {
 } else {
 	$fiscalYear = date('Y');
 }
-echo("fiscalYear: $fiscalYear\n");
+echo("fiscalYear: $fiscalYear\n\n");
 // end by eALPS Developer
 
 
@@ -98,7 +98,7 @@ $CFG->wwwroot   = $base_wwwroot.'/'.$fiscalYear.'/'.$siteEnName;
 	require(dirname(dirname(dirname(dirname(__FILE__)))).'/config.php');
 	require("$CFG->dirroot/lib/setup.php");
 	require($template_base.'/enrol/database/lib.php');
-	require($CFG->libdir.'/clilib.php');
+	/* require($CFG->libdir.'/clilib.php'); */
 	
 	echo("complete_require\n");
 	
@@ -159,7 +159,9 @@ $CFG->wwwroot   = $base_wwwroot.'/'.$fiscalYear.'/'.$siteEnName;
 	
 	echo($result."\n");
 	echo($siteJaName."の同期が終了しました．\n");
-	echo('処理時間は'.microtime(true)-$startTime."秒でした．\n");
+	$endTime = microtime(true);
+	$time = $endTime - $startTime;
+	echo('処理時間は'.$time."秒でした．\n\n");
 	
 // add by eALPS Developer
 }
