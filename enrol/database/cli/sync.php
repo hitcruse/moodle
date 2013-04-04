@@ -39,13 +39,13 @@ global $_SERVER;
 
 // add by eALPS Developer
 $siteArray = array (
-    't' => '工学部',
-    /*
-'e' => '教育学部',
-    'd'  => 'デフォルト',
-    'g' => '共通教育',
     'l' => '人文学部',
     'k' => '経済学部',
+    /*
+'t' => '工学部',
+    'e' => '教育学部',
+    'd'  => 'デフォルト',
+    'g' => '共通教育',
     's' => '理学部',
     'm' => '医学部',
     'a' => '農学部',
@@ -75,6 +75,7 @@ echo("fiscalYear: $fiscalYear\n");
 // add by eALPS Developer
 foreach($siteArray as $siteEnName => $siteJaName) {
 	echo($siteJaName."の同期スタート\n");
+	$startTime = microtime(true);
 // end by eALPS Developer
 
 	// add by eALPS Developer
@@ -96,8 +97,8 @@ $CFG->wwwroot   = $base_wwwroot.'/'.$fiscalYear.'/'.$siteEnName;
 		
 	require(dirname(dirname(dirname(dirname(__FILE__)))).'/config.php');
 	require("$CFG->dirroot/lib/setup.php");
-	require_once($template_base.'/enrol/database/lib.php');
-	require_once($CFG->libdir.'/clilib.php');
+	require($template_base.'/enrol/database/lib.php');
+	require($CFG->libdir.'/clilib.php');
 	
 	echo("complete_require\n");
 	
@@ -158,6 +159,7 @@ $CFG->wwwroot   = $base_wwwroot.'/'.$fiscalYear.'/'.$siteEnName;
 	
 	echo($result."\n");
 	echo($siteJaName."の同期が終了しました．\n");
+	echo('処理時間は'.microtime(true)-$startTime."秒でした．\n");
 	
 // add by eALPS Developer
 }
