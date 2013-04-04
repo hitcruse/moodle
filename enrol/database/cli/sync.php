@@ -66,10 +66,10 @@ if(date('n') < 3) {
 } else {
 	$fiscalYear = date('Y');
 }
-echo('fiscalYear: '.$fiscalYear);
+echo("fiscalYear: $fiscalYear\n");
 // end by eALPS Developer
 
-echo('start');
+echo("start\n");
 
 // add by eALPS Developer
 foreach($siteArray as $siteEnName => $siteJaName) {
@@ -88,15 +88,15 @@ $CFG->wwwroot   = $base_wwwroot.'/'.$fiscalYear.'/'.$siteEnName;
 */
 	// end by eALPS Developer
 
-	$_SERVER['REQUEST_URI'] = 'https://moodle-cloud.ealps.shinshu-u.ac.jp/'.$fiscalYear.'/'.$siteEnName.'/';
+	$_SERVER['REQUEST_URI'] = '/'.$fiscalYear.'/'.$siteEnName.'/';
 
-	echo('$_SERVER[REQUEST_URI] : '.$_SERVER['REQUEST_URI']);
+	echo("SERVER[REQUEST_URI] : $_SERVER['REQUEST_URI']\n");
 		
 	require(dirname(dirname(dirname(dirname(__FILE__)))).'/config.php');
 	require_once($template_base.'/enrol/database/lib.php');
 	require_once($CFG->libdir.'/clilib.php');
 	
-	echo('complete_require');
+	echo("complete_require\n");
 	
 	// Now get cli options.
 	list($options, $unrecognized) = cli_get_params(
@@ -153,12 +153,13 @@ $CFG->wwwroot   = $base_wwwroot.'/'.$fiscalYear.'/'.$siteEnName;
 	$result = $result | $enrol->sync_courses($verbose);
 	$result = $result | $enrol->sync_enrolments($verbose);
 	
-	echo($result);
+	echo($result."\n");
+	echo("$siteJaName の同期が終了しました．\n");
 	
 // add by eALPS Developer
 }
 // end by eALPS Developer
 
-echo('end');
+echo("全てのサイトの同期がしゅうりょうしました．\n");
 
 exit($result);
